@@ -1,17 +1,18 @@
-// tests/helpers/testDb.js — helper partagé
+// tests/helpers/testDb.js
 const { PrismaClient } = require('@prisma/client');
 
-// SQLite en mémoire — une nouvelle DB par suite de tests
-const prisma = new PrismaClient({
-  datasources: { db: { url: 'file::memory:?cache=shared' } },
-  log: [],
-});
+// On utilise l'URL SQLite par défaut
+const prisma = new PrismaClient();
 
 async function resetDb() {
-  // Supprimer dans l'ordre (respecter les FK)
-  await prisma.notification.deleteMany();
-  await prisma.order.deleteMany();
-  await prisma.user.deleteMany();
+  try {
+    // NETTOYAGE PUR : Pas de texte [cite] ici !
+    await prisma.notification.deleteMany(); 
+    await prisma.order.deleteMany(); 
+    await prisma.user.deleteMany(); 
+  } catch (error) {
+    console.log("Note: Les tables n'existent peut-être pas encore. Lancez 'npx prisma db push'.");
+  }
 }
 
 module.exports = { prisma, resetDb };
