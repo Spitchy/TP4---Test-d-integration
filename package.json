@@ -1,0 +1,34 @@
+{
+  "name": "tp4-integration",
+  "version": "1.0.0",
+  "description": "TP4 - Tests d'intégration - Mocks API, DB en mémoire, Débogage",
+  "scripts": {
+    "test": "jest --runInBand --forceExit",
+    "test:verbose": "jest --verbose --runInBand --forceExit",
+    "test:coverage": "jest --coverage --runInBand --forceExit",
+    "test:detect": "jest --detectOpenHandles --runInBand --forceExit",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": ["**/tests/**/*.test.js"],
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "lines": 80
+      }
+    },
+    "setupFilesAfterFramework": []
+  },
+  "dependencies": {
+    "@prisma/client": "^5.10.0",
+    "axios": "^1.6.7"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "prisma": "^5.10.0"
+  }
+}
